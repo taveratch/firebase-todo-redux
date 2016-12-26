@@ -1,11 +1,16 @@
-import {Router, Route} from 'react-router'
+import {Router, Route, IndexRoute} from 'react-router'
 import App from './App'
-import About from './App/about'
 import React from 'react'
-
+import ShowTodo from './App/show-todo'
+import Todos from './App/todos'
 export default (props) => (
   <Router {...props}>
-    <Route path='/' component={App} />
-    <Route path='/about' component={About} />
+    <Route path='/'>
+      <IndexRoute component={App} />
+      <Route path='section' component={Todos}>
+        <Route path=':id' component={ShowTodo}/>
+      </Route>
+    </Route>
+
   </Router>
 )
