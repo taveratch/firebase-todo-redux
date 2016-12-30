@@ -2,13 +2,16 @@ import _ from 'lodash'
 
 let initialState = {
   todo: [],
-  sections: []
+  singleTodo: []
 }
 
 import {
   LOAD_TODO_FAILED,
   LOAD_TODO_REQUEST,
-  LOAD_TODO_SUCCESS
+  LOAD_TODO_SUCCESS,
+  LOAD_SINGLE_TODO_REQUEST,
+  LOAD_SINGLE_TODO_SUCCESS,
+  LOAD_SINGLE_TODO_FAILED,
 } from 'constants/todo'
 
 export default (state = initialState, action) => {
@@ -16,7 +19,9 @@ export default (state = initialState, action) => {
   switch(action.type) {
     case LOAD_TODO_SUCCESS:
       newState.todo = action.payload
-      newState.sections = _.map(action.payload, 'name')
+      return newState
+    case LOAD_SINGLE_TODO_SUCCESS:
+      newState.singleTodo = action.payload.todos
       return newState
     case LOAD_TODO_REQUEST:
     case LOAD_TODO_FAILED:

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {loadSections, loadTodos} from 'actions/todo'
+import {loadSections, loadSingleTodos} from 'actions/todo'
 import {connect} from 'react-redux'
 import Card from './card'
 import _ from 'lodash'
@@ -12,7 +12,7 @@ class App extends Component {
     return (
       <div>
         {
-          _.map(reducer.todo, (section, i) => <Card onClick={this.props.loadTodos.bind(this, section.id)} key={i} name={section.name} />)
+          _.map(reducer.todo, (section, i) => <Card onClick={this.props.loadSingleTodos.bind(this, section.id)} key={i} name={section.name} />)
         }
         {this.props.children}
       </div>
@@ -24,4 +24,4 @@ const mapStateToProps = (state) => ({
   todo: state.todo
 })
 
-export default connect(mapStateToProps,{loadSections, loadTodos})(App);
+export default connect(mapStateToProps,{loadSections, loadSingleTodos})(App);
