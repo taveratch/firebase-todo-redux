@@ -21,7 +21,8 @@ export default (state = initialState, action) => {
       newState.todo = action.payload
       return newState
     case LOAD_SINGLE_TODO_SUCCESS:
-      newState.singleTodo = action.payload.todos
+      let id = action.payload.id
+      newState.todo[id].todos = action.payload.todos || []
       return newState
     case LOAD_TODO_REQUEST:
     case LOAD_TODO_FAILED:

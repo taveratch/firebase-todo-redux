@@ -55,6 +55,7 @@ export const loadSingleTodos = (id) => {
     })
     return getTodoDB(id)
       .then((todo) => {
+        dispatch(receiveTodos(todo))
         dispatch(push(`/section/${id}`))
       })
       .catch( error => dispatch({type: LOAD_SINGLE_TODO_FAILED, payload: error}))
