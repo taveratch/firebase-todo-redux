@@ -32,5 +32,5 @@ export default (state = initialState, action) => {
 }
 
 export const getTodoById = (state, id) => {
-  return state.todo.todo.find((section) => section.id+'' === id) || []
+  return state.todo.todo[id] || {}
 }
