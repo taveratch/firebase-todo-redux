@@ -4,6 +4,7 @@ const EMAIL = 'taweesoft@gmail.com'
 const PASS = 'todotest'
 import sectionModel from './models/section'
 import todoModel from './models/todo'
+import {loadSections} from 'actions/todo'
 export const init = () => {
   let config = {
     apiKey: "AIzaSyD1fF2lRhBTiaqFDXUFwrPRgNYwPXCPlXw",
@@ -56,5 +57,11 @@ export const addTodoItem = (id, name) => {
         .then( res => {resolve(res)})
         .catch( error => {reject(error)})
     })
+  })
+}
+
+export const listening = (store) => {
+  database.ref('/').on('value', (snapshot) => {
+    store.dispatch(loadSections())
   })
 }
