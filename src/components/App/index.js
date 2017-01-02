@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import {loadSections, loadSingleTodos, createSection} from 'actions/todo'
 import {connect} from 'react-redux'
 import Card from './card'
-import Loader from './loader'
+import Loader from './shared/loader'
 import _ from 'lodash'
 class App extends Component {
   componentDidMount() {
@@ -27,11 +27,11 @@ class App extends Component {
             <label htmlFor="section-name">Add new section</label>
           </div>
         </form>
-        <Loader />
         <ul className="collection with-header">
           <li className="collection-header"><h5>Sections</h5></li>
+          <Loader />
           {
-            _.map(reducer.todo, (section, i) => <Card onClick={this.props.loadSingleTodos.bind(this, section.id)} key={i} name={section.name} />)
+            _.map(reducer.todo, (section, i) => <Card onClick={this.props.loadSingleTodos.bind(this, section.id)} key={i} count={section.todos.length} name={section.name} />)
           }
         </ul>
       </div>

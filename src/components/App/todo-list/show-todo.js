@@ -2,7 +2,7 @@ import React from 'react'
 import {getTodoById} from 'reducers/todo'
 import {createTodoItem} from 'actions/todo'
 import _ from 'lodash'
-import Loader from './loader'
+import Loader from 'components/App/shared/loader'
 import {connect} from 'react-redux'
 class Todos extends React.Component {
   onSubmit = (e) => {
