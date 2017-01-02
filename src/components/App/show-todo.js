@@ -2,6 +2,7 @@ import React from 'react'
 import {getTodoById} from 'reducers/todo'
 import {createTodoItem} from 'actions/todo'
 import _ from 'lodash'
+import Loader from './loader'
 import {connect} from 'react-redux'
 class Todos extends React.Component {
   onSubmit = (e) => {
@@ -11,14 +12,20 @@ class Todos extends React.Component {
   }
   render() {
     return (
-      <div>
-        {
-          _.map(this.props.todo.todos || [], (todo) => todo.name)
-        }
+      <div className="container">
         <form onSubmit={this.onSubmit}>
-          <input ref="todo-name"/>
-          <button>create item</button>
+          <div className="input-field">
+            <input ref="todo-name" id="todo-name" placeholder="Add new todo item" className="validate" type="text"/>
+            <label htmlFor="todo-name">Add new todo item</label>
+          </div>
         </form>
+      <Loader />
+        <div className="collection">
+          {
+            _.map(this.props.todo.todos || [], (todo,i) => <a key={i} className="collection-item">{todo.name}</a>)
+          }
+        </div>
+
       </div>
     )
   }

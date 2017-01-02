@@ -2,6 +2,7 @@ import _ from 'lodash'
 
 let initialState = {
   todo: [],
+  isLoading: false,
   singleTodo: []
 }
 
@@ -19,12 +20,17 @@ export default (state = initialState, action) => {
   switch(action.type) {
     case LOAD_TODO_SUCCESS:
       newState.todo = action.payload
+      newState.isLoading = false
       return newState
     case LOAD_SINGLE_TODO_SUCCESS:
       let id = action.payload.id
+      newState.isLoading = false
       newState.todo[id].todos = action.payload.todos || []
       return newState
+    case LOAD_SINGLE_TODO_REQUEST:
     case LOAD_TODO_REQUEST:
+      newState.isLoading = true
+      return newState
     case LOAD_TODO_FAILED:
       return state
     default:
