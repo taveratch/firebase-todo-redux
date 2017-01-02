@@ -31,7 +31,7 @@ class App extends Component {
             _.map(reducer.todo, (section, i) => <Card onClick={this.props.loadSingleTodos.bind(this, section.id)}
                                                       key={i}
                                                       count={section.todos.length}
-                                                      name={section.name} />)
+                                                      section={section} />)
           }
         </ul>
         <div id="add-section-item-modal" className="modal bottom-sheet">

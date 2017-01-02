@@ -1,4 +1,6 @@
 import _ from 'lodash'
+import {format} from 'date-fns'
+
 let initialState = {
   todo: [],
   isLoading: true,
@@ -44,9 +46,21 @@ export const validateSections = (sections) => {
   array.reverse() //reverse the sections
   _.map(array, (section) => {
     section.todos = typeof section.todos === 'undefined' ? [] : section.todos //fill in `undefined todos` with empty array
+    section.dateStr = dateFormat(section.timestamp)
+    section.timeStr = timeFormat(section.timestamp)
     section.todos.reverse() //reverse todos
   })
   return array
+}
+
+const dateFormat = (timestamp) => {
+  let date = new Date(timestamp)
+  return format(date, 'D MMM YYYY')
+}
+
+const timeFormat = (timestamp) => {
+  let date = new Date(timestamp)
+  return format(date, 'h:m a')
 }
 
 export const getTodoById = (todo, id) => {

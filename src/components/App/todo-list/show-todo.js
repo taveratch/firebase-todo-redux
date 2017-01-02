@@ -27,7 +27,14 @@ class Todos extends React.Component {
           <li className="collection-header"><h5>{this.props.todo.name}</h5></li>
           <Loader />
           {
-            _.map(this.props.todo.todos || [], (todo,i) => <a key={i} className="collection-item red-text">{todo.name}</a>)
+            _.map(this.props.todo.todos || [], (todo,i) => (
+              <a key={i} className="collection-item">
+                <div className="flex flex-middle">
+                  <i className="material-icons margin-right">label</i>
+                  {todo.name}
+                </div>
+              </a>
+            ))
           }
         </ul>
 

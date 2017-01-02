@@ -8,6 +8,10 @@ $default-margin: 15px;
   justify-content: center;
 }
 
+.flex-middle {
+  align-items: center;
+}
+
 .margin-all {
   margin: 10px !important;
 }
@@ -30,7 +34,9 @@ $default-margin: 15px;
   right: 0;
 }
 
-
+.text-center {
+  text-align: center;
+}
 
 .relative {
   display: relative;
@@ -42,6 +48,10 @@ $default-margin: 15px;
 
 .margin-top {
   margin-top: $default-margin;
+}
+
+.margin-right {
+  margin-right: $default-margin;
 }
 
 .red-text {
