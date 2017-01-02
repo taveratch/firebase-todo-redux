@@ -37,6 +37,7 @@ const getSection = (dispatch) => {
 }
 
 export const loadSections = () => {
+  console.log('load sections');
   // return function that accept dispatch
   return (dispatch) => {
     // tell reducer that request has been sent
@@ -49,6 +50,7 @@ export const loadSections = () => {
 }
 
 export const loadSingleTodos = (id) => {
+  console.log('load single todo');
   return (dispatch) => {
     dispatch({
       type: LOAD_SINGLE_TODO_REQUEST

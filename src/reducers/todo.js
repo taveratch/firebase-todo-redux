@@ -2,7 +2,7 @@ import _ from 'lodash'
 
 let initialState = {
   todo: [],
-  isLoading: false,
+  isLoading: true,
   singleTodo: []
 }
 
