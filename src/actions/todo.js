@@ -1,6 +1,6 @@
 import {getSectionsDB, getTodoDB, addSection, addTodoItem} from 'javascripts/firebase'
 import {push} from 'react-router-redux'
-
+import {validateSections} from 'reducers/todo'
 import {
   LOAD_TODO_FAILED,
   LOAD_TODO_REQUEST,
@@ -19,7 +19,7 @@ import {
 const receiveSections = (sections) => (
   {
     type: LOAD_TODO_SUCCESS,
-    payload: sections
+    payload: validateSections(sections)
   }
 )
 

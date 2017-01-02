@@ -5,6 +5,9 @@ const PASS = 'todotest'
 import sectionModel from './models/section'
 import todoModel from './models/todo'
 import {loadSections} from 'actions/todo'
+import _ from 'lodash'
+import {validateSections} from 'reducers/todo'
+
 export const init = () => {
   let config = {
     apiKey: "AIzaSyD1fF2lRhBTiaqFDXUFwrPRgNYwPXCPlXw",
@@ -36,15 +39,15 @@ export const getTodoDB = (id) => {
   // return a Promise while waiting for retreiving data and filtering the specified todo
   return new Promise((resolve, reject) => {
     database.ref('/').once('value').then((sections) => {
-      sections = sections.val()
-      resolve(sections[id] || {})
+      sections = validateSections(sections.val())
+      resolve(sections.find((section) => (id === section.id)) || {})
     })
   })
 }
 
 export const addSection = (name) => {
   let key = database.ref('/').push().key
-  let model = sectionModel(key, name)
+  let model = sectionModel(key, name, firebase.database.ServerValue.TIMESTAMP)
   return database.ref('/'+ key).set(model)
 }
 

@@ -1,6 +1,7 @@
 import todoModel from './todo'
-export default (id, name) => ({
+export default (id, name, timestamp) => ({
   id: id,
   name: name,
-  todos: [todoModel('Sample')]
+  todos: [],
+  timestamp: timestamp
 })

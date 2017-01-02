@@ -1,5 +1,4 @@
 import _ from 'lodash'
-
 let initialState = {
   todo: [],
   isLoading: true,
@@ -25,7 +24,9 @@ export default (state = initialState, action) => {
     case LOAD_SINGLE_TODO_SUCCESS:
       let id = action.payload.id
       newState.isLoading = false
-      newState.todo[id].todos = action.payload.todos || []
+      let todo = getTodoById(newState.todo, id)
+      todo.todos = action.payload.todos || []
+      todo.todos.reverse() //reverse each item
       return newState
     case LOAD_SINGLE_TODO_REQUEST:
     case LOAD_TODO_REQUEST:
@@ -38,6 +39,16 @@ export default (state = initialState, action) => {
   }
 }
 
-export const getTodoById = (state, id) => {
-  return state.todo.todo[id] || {}
+export const validateSections = (sections) => {
+  let array = _.filter(sections, (section) => { return true }) //convert object with key to array
+  array.reverse() //reverse the sections
+  _.map(array, (section) => {
+    section.todos = typeof section.todos === 'undefined' ? [] : section.todos //fill in `undefined todos` with empty array
+    section.todos.reverse() //reverse todos
+  })
+  return array
+}
+
+export const getTodoById = (todo, id) => {
+  return todo.find((section) => (id === section.id)) || {}
 }

@@ -53,7 +53,7 @@ class Todos extends React.Component {
 }
 
 const mapStateToProps = (state, ownProps) => ({
-  todo: getTodoById(state, ownProps.params.id)
+  todo: getTodoById(state.todo.todo, ownProps.params.id)
 })
 
 
