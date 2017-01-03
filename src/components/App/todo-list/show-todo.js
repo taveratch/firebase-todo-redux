@@ -1,15 +1,18 @@
 import React from 'react'
 import {getTodoById} from 'reducers/todo'
-import {createTodoItem} from 'actions/todo'
+import {createTodoItem, itemChecked} from 'actions/todo'
 import _ from 'lodash'
 import Loader from 'components/App/shared/loader'
 import {connect} from 'react-redux'
 import AddButton from 'components/App/shared/add-button'
+import TodoItem from './todo-item'
+
 class Todos extends React.Component {
   onSubmit = (e) => {
     e.preventDefault()
     let ref = this.refs['todo-name']
     let name = ref.value
+    if(name === '') return
     this.props.createTodoItem(this.props.params.id, name)
     ref.value = ''
     window.$('.modal').modal('close')
@@ -17,8 +20,8 @@ class Todos extends React.Component {
   componentDidMount() {
     window.$('.modal').modal()
   }
-  onClick = () => {
-
+  onCheckedChange = (itemId, e) => { // when use .bind(this, arg), the parameters of function will be opposite = (arg, this)
+    this.props.itemChecked(this.props.todo.id, itemId, e.target.checked)
   }
   render() {
     return (
@@ -27,17 +30,9 @@ class Todos extends React.Component {
           <li className="collection-header"><h5>{this.props.todo.name}</h5></li>
           <Loader />
           {
-            _.map(this.props.todo.todos || [], (todo,i) => (
-              <a key={i} className="collection-item">
-                <div className="flex flex-middle">
-                  <i className="material-icons margin-right">label</i>
-                  {todo.name}
-                </div>
-              </a>
-            ))
+            _.map(this.props.todo.todos || [], (todo,i) => <TodoItem todo={todo} itemKey={i} key={i} checked={todo.checked} onChange={this.onCheckedChange.bind(this, todo.id)}/>)
           }
         </ul>
-
         <div id="add-todo-item-modal" className="modal bottom-sheet">
           <div className="modal-content">
             <h5 style={{marginBottom: 30}}>Add new todo</h5>
@@ -53,7 +48,9 @@ class Todos extends React.Component {
           </div>
         </div>
 
-        <AddButton href="#add-todo-item-modal" onClick={this.onClick}/>
+        <a style={{margin: "20px"}} href={"#add-todo-item-modal"} className="modal-trigger pull-right pull-bottom btn-floating btn-large waves-effect waves-light teal">
+          <i className="material-icons">add</i>
+        </a>
       </div>
     )
   }
@@ -64,4 +61,4 @@ const mapStateToProps = (state, ownProps) => ({
 })
 
 
-export default connect(mapStateToProps, {createTodoItem})(Todos)
+export default connect(mapStateToProps, {createTodoItem, itemChecked})(Todos)

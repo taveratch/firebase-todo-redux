@@ -55,7 +55,8 @@ export const addTodoItem = (id, name) => {
   return new Promise((resolve, reject) => {
     database.ref(`/${id}`).once('value').then((todo) => {
       let todos = todo.val().todos || []
-      todos.push(todoModel(name))
+      let key = database.ref(`/${id}`).push().key
+      todos.push(todoModel(key, name, firebase.database.ServerValue.TIMESTAMP))
       database.ref(`/${id}/todos`).set(todos)
         .then( res => {resolve(res)})
         .catch( error => {reject(error)})

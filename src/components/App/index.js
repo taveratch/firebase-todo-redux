@@ -4,6 +4,7 @@ import {connect} from 'react-redux'
 import Card from './card'
 import Loader from './shared/loader'
 import _ from 'lodash'
+import {getUncheckedCount} from 'reducers/todo'
 import AddButton from 'components/App/shared/add-button'
 class App extends Component {
   componentDidMount() {
@@ -16,6 +17,7 @@ class App extends Component {
     // get value from input field and insert to database
     let ref = this.refs['section-name']
     let name = ref.value
+    if(name === '') return
     this.props.createSection(name)
     ref.value = '' //clear input field
     window.$('.modal').modal('close')
@@ -30,7 +32,8 @@ class App extends Component {
           {
             _.map(reducer.todo, (section, i) => <Card onClick={this.props.loadSingleTodos.bind(this, section.id)}
                                                       key={i}
-                                                      count={section.todos.length}
+                                                      totalCount={section.todos.length}
+                                                      checkedCount={getUncheckedCount(section.todos)}
                                                       section={section} />)
           }
         </ul>

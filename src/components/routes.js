@@ -11,6 +11,5 @@ export default (props) => (
         <Route path=':id' component={ShowTodo}/>
       </Route>
     </Route>
-
   </Router>
 )

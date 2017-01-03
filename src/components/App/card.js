@@ -3,11 +3,11 @@ import _ from 'lodash'
 
 export default (props) => {
   return (
-    <a className="collection-item" onClick={props.onClick}>
-      <span className="badge">{props.count}</span>
+    <a className="collection-item pointer" onClick={props.onClick}>
+      <span className="badge">{`${props.checkedCount}/${props.totalCount}`}</span>
       <div className="flex flex-middle">
         <div className="circle text-center teal margin-right">
-          {_.toUpper(props.section.name.substring(0,1))}
+          {getIconText(props.section.name)}
         </div>
         <div>
           <span>{props.section.name}</span>
@@ -17,4 +17,8 @@ export default (props) => {
       </div>
     </a>
   )
+}
+
+const getIconText = (text) => {
+  return _.toUpper(text.substring(0,1))
 }

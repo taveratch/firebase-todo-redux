@@ -13,8 +13,10 @@ import {
   CREATE_SECTION_FAILED,
   CREATE_TODO_REQUEST,
   CREATE_TODO_SUCCESS,
-  CREATE_TODO_FAILED
+  CREATE_TODO_FAILED,
+  ITEM_CHECKED_CHANGE
 } from 'constants/todo'
+import {saveCheckedChange} from 'javascripts/internal-data'
 
 const receiveSections = (sections) => (
   {
@@ -92,4 +94,14 @@ export const createTodoItem = (id, name) => {
         console.log(error)
       })
    }
+}
+
+export const itemChecked = (sectionId, itemId, checked) => {
+  return (dispatch) => {
+    saveCheckedChange(sectionId, itemId, checked)
+    dispatch({
+      type: ITEM_CHECKED_CHANGE,
+      payload: {sectionId, itemId, checked}
+    })
+  }
 }
