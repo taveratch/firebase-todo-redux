@@ -2,7 +2,6 @@ import {Router, Route, IndexRoute} from 'react-router'
 import App from './App'
 import React from 'react'
 import ShowTodo from './App/todo-list/show-todo'
-import Todos from './App/todo-list/todos'
 export default (props) => (
   <Router {...props}>
     <Route path='/'>

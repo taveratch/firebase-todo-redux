@@ -23,8 +23,6 @@ export const init = () => {
     })
     .catch(function(error) {
       console.log('Signin failed');
-      var errorCode = error.code;
-      var errorMessage = error.message;
     });
 	database = firebase.database()
 }

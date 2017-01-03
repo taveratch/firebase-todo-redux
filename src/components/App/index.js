@@ -5,7 +5,7 @@ import Card from './card'
 import Loader from './shared/loader'
 import _ from 'lodash'
 import {getUncheckedCount} from 'reducers/todo'
-import AddButton from 'components/App/shared/add-button'
+
 class App extends Component {
   componentDidMount() {
     //load sections since entered this page

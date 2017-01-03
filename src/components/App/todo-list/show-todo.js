@@ -4,7 +4,6 @@ import {createTodoItem, itemChecked} from 'actions/todo'
 import _ from 'lodash'
 import Loader from 'components/App/shared/loader'
 import {connect} from 'react-redux'
-import AddButton from 'components/App/shared/add-button'
 import TodoItem from './todo-item'
 
 class Todos extends React.Component {
