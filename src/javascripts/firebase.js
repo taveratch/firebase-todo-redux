@@ -33,16 +33,19 @@ export const getSectionsDB = () => {
   return database.ref('/').once('value')
 }
 
+// get specified section
 export const getTodoDB = (sectionId) => {
   return database.ref(`/${sectionId}`).once('value')
 }
 
+// add new section
 export const addSection = (name) => {
   let key = database.ref('/').push().key
   let model = sectionModel(key, name, firebase.database.ServerValue.TIMESTAMP)
   return database.ref('/'+ key).set(model)
 }
 
+// add new todo item into specified section
 export const addTodoItem = (id, name) => {
   return new Promise((resolve, reject) => {
     database.ref(`/${id}`).once('value').then((todo) => {
