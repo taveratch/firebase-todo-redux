@@ -34,14 +34,7 @@ export const getSectionsDB = () => {
 }
 
 export const getTodoDB = (sectionId) => {
-  // return a Promise while waiting for retreiving data and filtering the specified todo
   return database.ref(`/${sectionId}`).once('value')
-  // return new Promise((resolve, reject) => {
-  //   database.ref(`/${sectionId}`).once('value').then((section) => {
-  //     section = validateSections([section.val()])
-  //     resolve(section[0] || {})
-  //   })
-  // })
 }
 
 export const addSection = (name) => {
