@@ -21,10 +21,10 @@ const receiveSections = (sections) => (
   }
 )
 
-const receiveTodos = (todos) => (
+const receiveParticularSection = (section) => (
   {
     type: LOAD_SINGLE_TODO_SUCCESS,
-    payload: todos
+    payload: validateSections([section])[0]
   }
 )
 
@@ -55,7 +55,7 @@ export const loadSingleTodos = (id) => {
     })
     return getTodoDB(id)
       .then((todo) => {
-        dispatch(receiveTodos(todo))
+        dispatch(receiveParticularSection(todo.val()))
         dispatch(push(`/section/${id}`))
       })
       .catch( error => dispatch({type: LOAD_SINGLE_TODO_FAILED, payload: error}))
